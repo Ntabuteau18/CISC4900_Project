@@ -15,27 +15,25 @@ public struct UIManagerParameters
     [Header("Resolution Screen Options")]
     
     [SerializeField] Color correctBGColor;
-    public Color CorrectBGColor { get { return correctBGColor;  } }
+    public Color CorrectBGColor { get { return correctBGColor; } }
     
     [SerializeField] Color incorrectBGColor;
-    public Color InCorrectBGColor { get { return incorrectBGColor; } }
+    public Color IncorrectBGColor { get { return incorrectBGColor; } }
     
     [SerializeField] Color finalBGColor;
     public Color FinalBGColor { get { return finalBGColor; } }
 }
-
 [Serializable()]
 public struct UIElements
 {
-    [SerializeField] RectTransform ansContentArea;
-    public RectTransform AnsContentArea { get { return ansContentArea; } }
+    [SerializeField] RectTransform answersContentArea;
+    public RectTransform AnswersContentArea { get { return answersContentArea; } }
 
     [SerializeField] TextMeshProUGUI questionInfoTextObject;
     public TextMeshProUGUI QuestionInfoTextObject { get { return questionInfoTextObject; } }
 
     [SerializeField] TextMeshProUGUI scoreText;
     public TextMeshProUGUI ScoreText { get { return scoreText; } }
-
     [Space]
 
     [SerializeField] Animator resolutionScreenAnimator;
@@ -44,16 +42,15 @@ public struct UIElements
     [SerializeField] Image resolutionBG;
     public Image ResolutionBG { get { return resolutionBG; } }
 
-    [SerializeField] TextMeshProUGUI resolutionStateTxt;
-    public TextMeshProUGUI ResolutionStateTxT { get { return resolutionStateTxt; } }
+    [SerializeField] TextMeshProUGUI resolutionStateInfoText;
+    public TextMeshProUGUI ResolutionStateInfoText { get { return resolutionStateInfoText; } }
 
-    [SerializeField] TextMeshProUGUI resolutionScoreTxt;
-    public TextMeshProUGUI ResolutionScoreTxt { get { return resolutionScoreTxt; } }
-
+    [SerializeField] TextMeshProUGUI resolutionScoreText;
+    public TextMeshProUGUI ResolutionScoreText { get { return resolutionScoreText; } }
 
     [Space]
-    [SerializeField] TextMeshProUGUI highScoreTxt;
-    public TextMeshProUGUI HighScoreTxt { get { return highScoreTxt; } }
+    [SerializeField] TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI HighScoreText { get { return highScoreText; } }
 
     [SerializeField] CanvasGroup mainCanvasGroup;
     public CanvasGroup MainCanvasGroup { get { return mainCanvasGroup; } }
@@ -61,25 +58,25 @@ public struct UIElements
     [SerializeField] RectTransform finishedUIElements;
     public RectTransform FinishedUIElements { get { return finishedUIElements; } }
 }
+
 public class UIManager : MonoBehaviour
 {
-  public enum ResolutionScreenType{ Correct,Incorrect, Finish}
+
+    public enum ResolutionScreenType {Correct, Incorrect, Finish}
 
     [Header("References")]
-    [SerializeField] GameEvents events;
+    [SerializeField] GameEvents events = null;
 
-    [Header("UI Elements (Prefabs")]
-    [SerializeField] AnswersSheet ansPrefab;
-
-    [SerializeField] UIElements uiElements;
+    [Header("UI Elements (Prefabs)")]
+    [SerializeField] AnswerList answerPrefab = null;
+    [SerializeField] UIElements uIElements = new UIElements();
 
     [Space]
-    [SerializeField] UIManagerParameters parameters;
+    [SerializeField] UIManagerParameters parameters = new UIManagerParameters();
 
-    List<AnswersSheet> currentAnswer = new List<AnswersSheet>();
-
-    private IEnumerator IEDisplayTimeRes;
-    private int resStateParameterHash = 0;
+    List<AnswerList> currentAnswer = new List<AnswerList>();
+    private int resolutionStateParameterHash = 0;
+    private IEnumerator IEDisplayTimeRes = null;
 
      void OnEnable()
     {
@@ -93,19 +90,27 @@ public class UIManager : MonoBehaviour
         events.DisplayResolutionScreen -= DisplayResolution;
         events.ScoreUpdated -= UpdateScoreUI;
     }
-
      void Start()
     {
         UpdateScoreUI();
-        resStateParameterHash = Animator.StringToHash("ScreenState");  
+        resolutionStateParameterHash = Animator.StringToHash("ScreenState"); 
+
     }
+    
+
+    void UpdateQuestionUI(QuestionList question)
+    {
+        uIElements.QuestionInfoTextObject.text = question.Info;
+        CreateAnswers(question);
+    }
+
     void DisplayResolution(ResolutionScreenType type, int score)
     {
         UpdateResolutionUI(type, score);
-        uiElements.ResolutionScreenAnimator.SetInteger(resStateParameterHash, 2);
-        uiElements.MainCanvasGroup.blocksRaycasts = false;
+        uIElements.ResolutionScreenAnimator.SetInteger(resolutionStateParameterHash, 2);
+        uIElements.MainCanvasGroup.blocksRaycasts = false;
 
-        if(type != ResolutionScreenType.Finish)
+        if (type != ResolutionScreenType.Finish)
         {
             if(IEDisplayTimeRes != null)
             {
@@ -114,91 +119,87 @@ public class UIManager : MonoBehaviour
             IEDisplayTimeRes = DisplayTimeResolution();
             StartCoroutine(IEDisplayTimeRes);
         }
-
     }
+
     IEnumerator DisplayTimeResolution()
     {
         yield return new WaitForSeconds(GameUtil.ResolutionDelay);
-        uiElements.ResolutionScreenAnimator.SetInteger(resStateParameterHash, 1);
-        uiElements.MainCanvasGroup.blocksRaycasts = true;
+        uIElements.ResolutionScreenAnimator.SetInteger(resolutionStateParameterHash, 1);
+        uIElements.MainCanvasGroup.blocksRaycasts = true;
     }
-    
+
     void UpdateResolutionUI(ResolutionScreenType type, int score)
     {
         var highscore = PlayerPrefs.GetInt(GameUtil.SavePrefKey);
+
         switch (type)
         {
             case ResolutionScreenType.Correct:
-                uiElements.ResolutionBG.color = parameters.CorrectBGColor;
-                uiElements.ResolutionStateTxT.text = "CORRECT!";
-                uiElements.ResolutionScoreTxt.text = "+" + score;
+                uIElements.ResolutionBG.color = parameters.CorrectBGColor;
+                uIElements.ResolutionStateInfoText.text = "CORRECT";
+                uIElements.ResolutionScoreText.text = "+" + score;
                 break;
             case ResolutionScreenType.Incorrect:
-                uiElements.ResolutionBG.color = parameters.InCorrectBGColor;
-                uiElements.ResolutionStateTxT.text = "WRONG!";
-                uiElements.ResolutionScoreTxt.text = "-" + score;
+                uIElements.ResolutionBG.color = parameters.IncorrectBGColor;
+                uIElements.ResolutionStateInfoText.text = "WRONG";
+                uIElements.ResolutionScoreText.text = "-" + score;
                 break;
             case ResolutionScreenType.Finish:
-                uiElements.ResolutionBG.color = parameters.FinalBGColor;
-                uiElements.ResolutionStateTxT.text = "FINAL SCORE!";
-                uiElements.ResolutionScoreTxt.text = "+" + score;
+                uIElements.ResolutionBG.color = parameters.FinalBGColor;
+                uIElements.ResolutionStateInfoText.text = "Final Score";
 
                 StartCoroutine(CalculateScore());
-                uiElements.FinishedUIElements.gameObject.SetActive(true);
-                uiElements.HighScoreTxt.gameObject.SetActive(true);
-                uiElements.HighScoreTxt.text = ((highscore > events.StarterHighscore) ? "<color=yellow>new </color>" : string.Empty) + "Highscore " + highscore;
+                uIElements.FinishedUIElements.gameObject.SetActive(true);
+                uIElements.HighScoreText.gameObject.SetActive(true);
+                uIElements.HighScoreText.text = ((highscore > events.StartUpHighscore) ? "<color=yellow>new </color>" : string.Empty) + "Highscore: " + highscore;
                 break;
-            
+ 
+       
         }
-
-
     }
+
     IEnumerator CalculateScore()
     {
         var scoreValue = 0;
         while (scoreValue < events.CurrentFinalScore)
         {
             scoreValue++;
-            uiElements.ResolutionScoreTxt.text = scoreValue.ToString();
-
+            uIElements.ResolutionScoreText.text = scoreValue.ToString();
             yield return null;
         }
     }
 
-    void UpdateQuestionUI(Questions question)
-    {
-        uiElements.QuestionInfoTextObject.text = question.Info;
-        CreateAnswers(question);
-    }
-    void CreateAnswers(Questions question)
+    void CreateAnswers(QuestionList question)
     {
         EraseAnswers();
 
         float offset = 0 - parameters.Margins;
         for (int i = 0; i < question.Answers.Length; i++)
         {
-            AnswersSheet newAnswer = (AnswersSheet)Instantiate(ansPrefab, uiElements.AnsContentArea);
+            AnswerList newAnswer = (AnswerList)Instantiate(answerPrefab, uIElements.AnswersContentArea);
             newAnswer.UpdateData(question.Answers[i].Info, i);
 
             newAnswer.Rect.anchoredPosition = new Vector2(0, offset);
 
             offset -= (newAnswer.Rect.sizeDelta.y + parameters.Margins);
-            uiElements.AnsContentArea.sizeDelta = new Vector2(uiElements.AnsContentArea.sizeDelta.x, offset * -1);
+            uIElements.AnswersContentArea.sizeDelta = new Vector2(uIElements.AnswersContentArea.sizeDelta.x, offset * -1);
 
             currentAnswer.Add(newAnswer);
         }
     }
+
     void EraseAnswers()
     {
-        foreach(var answer in currentAnswer)
+        foreach (var answer in currentAnswer)
         {
             Destroy(answer.gameObject);
         }
         currentAnswer.Clear();
     }
+
     void UpdateScoreUI()
     {
-        uiElements.ScoreText.text = "Score: " + events.CurrentFinalScore;
+        uIElements.ScoreText.text = " " + events.CurrentFinalScore;
     }
-
 }
+

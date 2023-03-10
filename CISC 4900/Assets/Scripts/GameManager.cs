@@ -7,29 +7,29 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    Questions[] questions = null;
-    public Questions[] Questions { get { return questions; } }
+    QuestionList[] questions = null;
+    public QuestionList[] Questions { get { return questions; } }
 
     [SerializeField] GameEvents events = null;
 
     [SerializeField] Animator timerAnimator = null;
+
     [SerializeField] TextMeshProUGUI timerText = null;
 
-    [SerializeField] Color timerHalfway = Color.blue;
-    [SerializeField] Color timerAlmostDone = Color.red;
+    [SerializeField] Color timerHalfWay      = Color.yellow;
+    [SerializeField] Color timerAlmostDone   = Color.red;
+    private          Color timerDefaultColor = Color.black;
 
-
-    private List<AnswersSheet> PickedAnswers = new List<AnswersSheet>();
-    private List<int> FinishedQuestions = new List<int>();
-    private int currentQuestion = 0;
-
-    private int timerStateParameterHash = 0;
+    private List<AnswerList> PickedAnswers = new List<AnswerList>();
+    private List<int> FinishedQuestions    = new List<int>();
+    private int currentQuestion            = 0;
+    private int timerStateParaHash         = 0;
 
     private IEnumerator IEWaitTillNextRound = null;
-    private IEnumerator IEStartTimer = null;
-    private Color timerDefaultColor = Color.white;
+    private IEnumerator IEStartTimer        = null;
+    
 
-    private bool isFinished
+    private bool IsFinished
     {
         get
         {
@@ -37,72 +37,67 @@ public class GameManager : MonoBehaviour
         }
     }
 
-     void OnEnable()
+    void OnEnable()
     {
         events.UpdateQuestionAnswer += UpdateAnswers;
-        
     }
     void OnDisable()
     {
         events.UpdateQuestionAnswer -= UpdateAnswers;
-
     }
     void Awake()
     {
         events.CurrentFinalScore = 0;
     }
 
-
     void Start()
     {
-        events.StarterHighscore = PlayerPrefs.GetInt(GameUtil.SavePrefKey);
-        timerDefaultColor = timerText.color;
-        loadQuestions();
-        
+        events.StartUpHighscore = PlayerPrefs.GetInt(GameUtil.SavePrefKey);
 
-        timerStateParameterHash = Animator.StringToHash("TimerState");
+        timerDefaultColor = timerText.color;
+        LoadQuestions();
+
+        timerStateParaHash = Animator.StringToHash("TimerState");
 
         var seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
         UnityEngine.Random.InitState(seed);
-        foreach (var question in Questions)
-        {
-            Debug.Log(question.Info);
-        }
+
+
         Display();
     }
-    public void UpdateAnswers(AnswersSheet newAns)
+
+    public void UpdateAnswers(AnswerList newAnswer)
     {
-        if (Questions[currentQuestion].GetAnswerType == global::Questions.AnswerType.Single)
+        if (Questions[currentQuestion].GetAnswerType == QuestionList.AnswerType.Single)
         {
             foreach (var answer in PickedAnswers)
             {
-                if (answer != newAns)
+                if (answer != newAnswer)
                 {
                     answer.Reset();
                 }
-                PickedAnswers.Clear();
-                PickedAnswers.Add(newAns);
+                
             }
+            PickedAnswers.Clear();
+            PickedAnswers.Add(newAnswer);
         }
         else
         {
-            bool alreadyPicked = PickedAnswers.Exists(x => x == newAns);
+            bool alreadyPicked = PickedAnswers.Exists(x => x == newAnswer);
             if (alreadyPicked)
             {
-                PickedAnswers.Remove(newAns);
+                PickedAnswers.Remove(newAnswer);
             }
             else
             {
-                PickedAnswers.Add(newAns);
+                PickedAnswers.Add(newAnswer);
             }
         }
     }
 
-
-
     public void EraseAnswers()
     {
-        PickedAnswers = new List<AnswersSheet>();
+        PickedAnswers = new List<AnswerList>();
     }
 
     void Display()
@@ -113,102 +108,139 @@ public class GameManager : MonoBehaviour
         if (events.UpdateQuestionUI != null)
         {
             events.UpdateQuestionUI(question);
-        }
-        else
-        {
-            Debug.LogWarning("Error occured");
-        }
+        } else{ Debug.Log("Error occured"); }
 
         if (question.UseTimer)
         {
             UpdateTimer(question.UseTimer);
         }
     }
+    
+
     public void Accept()
     {
         UpdateTimer(false);
-        bool isCorrect = CheckAnswer();
+        bool isCorrect = CheckAnswers();
         FinishedQuestions.Add(currentQuestion);
 
         
-       
-        UpdateScore((isCorrect) ? Questions[currentQuestion].PlusScore : -Questions[currentQuestion].PlusScore);
 
-        if (isFinished)
+        UpdateScore((isCorrect) ? Questions[currentQuestion].AddScore : -Questions[currentQuestion].AddScore);
+
+        if (IsFinished)
         {
             SetHighScore();
         }
 
-        var type = (isFinished) ? UIManager.ResolutionScreenType.Finish : (isCorrect) ? UIManager.ResolutionScreenType.Correct : UIManager.ResolutionScreenType.Incorrect;
+        var type
+            = (IsFinished)
+            ? UIManager.ResolutionScreenType.Finish
+            : (isCorrect) ? UIManager.ResolutionScreenType.Correct
+            : UIManager.ResolutionScreenType.Incorrect;
 
-        if(events.DisplayResolutionScreen != null)
+        if (events.DisplayResolutionScreen != null)
         {
-            events.DisplayResolutionScreen(type, Questions[currentQuestion].PlusScore);
+            events.DisplayResolutionScreen(type, Questions[currentQuestion].AddScore);
         }
 
-        if(IEWaitTillNextRound != null)
+        
+        if (IEWaitTillNextRound != null)
         {
             StopCoroutine(IEWaitTillNextRound);
         }
         IEWaitTillNextRound = WaitTillNextRound();
         StartCoroutine(IEWaitTillNextRound);
     }
-    IEnumerator WaitTillNextRound()
-    {
-        yield return new WaitForSeconds(GameUtil.ResolutionDelay);
-        Display();
-    }
 
-    Questions GetRandomQuestion()
+     void UpdateTimer(bool state)
     {
-        var randomIndex = GetRandomQuestionIndex();
-        currentQuestion = randomIndex;
-        return Questions[currentQuestion];
-    }
-
-    void UpdateTimer(bool state)
-    {
-        switch (state)      
+        switch (state)
         {
             case true:
                 IEStartTimer = StartTimer();
                 StartCoroutine(IEStartTimer);
 
-                timerAnimator.SetInteger(timerStateParameterHash, 2);
+                timerAnimator.SetInteger(timerStateParaHash, 2);
                 break;
             case false:
                 if(IEStartTimer != null)
                 {
                     StopCoroutine(IEStartTimer);
                 }
-
-                timerAnimator.SetInteger(timerStateParameterHash, 1);
+                timerAnimator.SetInteger(timerStateParaHash, 1);
                 break;
         }
-    }  
+    }
     IEnumerator StartTimer()
     {
         var totalTime = Questions[currentQuestion].Timer;
-        var timeLeft = totalTime;
+        var timeleft = totalTime;
+
 
         timerText.color = timerDefaultColor;
-        while (timeLeft > 0)
+        while (timeleft > 0)
         {
-            if(timeLeft < totalTime / 2 && timeLeft > totalTime / 4)
+            timeleft--;
+            if(timeleft < totalTime / 2 && timeleft > totalTime/ 4)
             {
-                timerText.color = timerHalfway;
+                timerText.color = timerHalfWay;
             }
-            if (timeLeft < totalTime / 4)
+            if(timeleft < totalTime / 4)
             {
                 timerText.color = timerAlmostDone;
             }
 
-
-                timeLeft--;
-            timerText.text = timeLeft.ToString();
+            timerText.text = timeleft.ToString();
             yield return new WaitForSeconds(1f);
         }
         Accept();
+    }
+
+    IEnumerator WaitTillNextRound()
+    {
+        yield return new WaitForSeconds(GameUtil.ResolutionDelay);
+        Display();
+    }
+
+    bool CheckAnswers()
+    {
+        if (!CompareAnswers())
+        {
+            return false;
+        }
+        return true;
+    }
+
+    bool CompareAnswers()
+    {
+        if (PickedAnswers.Count > 0)
+        {
+            List<int> CorrectAnswers_ = Questions[currentQuestion].GetCorrectAnswers();
+            List<int> PickedAnswers_ = PickedAnswers.Select(x => x.AnswerIndex).ToList();
+
+            var n = CorrectAnswers_.Except(PickedAnswers_).ToList();
+            var s = PickedAnswers_.Except(CorrectAnswers_).ToList();
+
+            return !n.Any() && !s.Any();
+        }
+        return false;
+    }
+
+    void LoadQuestions()
+    {
+        Object[] obj = Resources.LoadAll("Questions", typeof(QuestionList));
+        questions = new QuestionList[obj.Length];
+        for (int i = 0; i < obj.Length; i++)
+        {
+            questions[i] = (QuestionList)obj[i];
+        }
+    }
+
+    QuestionList GetRandomQuestion()
+    {
+        var randomIndex = GetRandomQuestionIndex();
+        currentQuestion = randomIndex;
+        return Questions[currentQuestion];
     }
 
     int GetRandomQuestionIndex()
@@ -223,50 +255,9 @@ public class GameManager : MonoBehaviour
         }
         return random;
     }
+    
+    
 
-    private void SetHighScore()
-    {
-        var highscore = PlayerPrefs.GetInt(GameUtil.SavePrefKey);
-        if (highscore < events.CurrentFinalScore)
-        {
-            PlayerPrefs.SetInt(GameUtil.SavePrefKey, events.CurrentFinalScore);
-        }
-
-    }
-
-
-    void loadQuestions()
-    {
-
-        Object[] objs = Resources.LoadAll("Questions", typeof(Questions));
-        questions = new Questions[objs.Length];
-        for (int i = 0; i < objs.Length; i++)
-        {
-            questions[i] = (Questions)objs[i];
-        }
-    }
-    bool CheckAnswer()
-    {
-        if (!CompareAnswers())
-        {
-            return false;
-        }
-        return true;
-    }
-    bool CompareAnswers()
-    {
-        if (PickedAnswers.Count > 0)
-        {
-            List<int> c = Questions[currentQuestion].GetCorrectAns();
-            List<int> p = PickedAnswers.Select(x => x.AnsIndex).ToList();
-
-            var f = c.Except(p).ToList();
-            var s = p.Except(c).ToList();
-
-            return !f.Any() && !s.Any();
-        }
-        return false;
-    }
     private void UpdateScore(int add)
     {
         events.CurrentFinalScore += add;
@@ -276,14 +267,26 @@ public class GameManager : MonoBehaviour
             events.ScoreUpdated();
         }
     }
-    public void RestartGame()
+
+    private void SetHighScore()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        var highscore = PlayerPrefs.GetInt(GameUtil.SavePrefKey);
+        if (highscore < events.CurrentFinalScore)
+        {
+            PlayerPrefs.SetInt(GameUtil.SavePrefKey, events.CurrentFinalScore);
+        }
     }
-    public void BacktoMenu()
+
+    public void Restart()
+    {
+        
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
+
+    public void menu()
     {
         SceneManager.LoadScene(0);
     }
+
 }
-
-

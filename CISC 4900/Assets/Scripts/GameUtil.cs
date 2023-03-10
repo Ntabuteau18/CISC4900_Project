@@ -1,4 +1,3 @@
-
 public class GameUtil 
 {
     public const float ResolutionDelay = 1;

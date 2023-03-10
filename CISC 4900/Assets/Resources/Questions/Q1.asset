@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59b11674bf533de44b416e52e79aad5d, type: 3}
+  m_Script: {fileID: 11500000, guid: a05067dd46f27074da522342de11580e, type: 3}
   m_Name: Q1
   m_EditorClassIdentifier: 
-  info: 2+2 = ?
+  info: 2+2=?
   answers:
-  - info: 1
+  - info: 2
     isCorrect: 0
   - info: 4
     isCorrect: 1
   useTimer: 0
   timer: 0
-  ansType: 0
-  plusScore: 10
+  answerType: 0
+  addScore: 10
