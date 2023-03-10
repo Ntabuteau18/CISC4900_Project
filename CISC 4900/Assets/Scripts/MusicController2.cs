@@ -35,7 +35,8 @@ public class MusicController2 : MonoBehaviour
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "QuizBeginning")
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "QuizBeginning" || sceneName == "HistoryQuiz")
         {
             if (currentClip != musicClip2)
             {
