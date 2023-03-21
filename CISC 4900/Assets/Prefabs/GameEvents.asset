@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameEvents
   m_EditorClassIdentifier: 
   CurrentFinalScore: 0
+  StartUpHighscore: 0

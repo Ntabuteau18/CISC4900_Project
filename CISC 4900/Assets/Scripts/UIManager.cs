@@ -165,6 +165,7 @@ public class UIManager : MonoBehaviour
         {
             scoreValue++;
             uIElements.ResolutionScoreText.text = scoreValue.ToString();
+
             yield return null;
         }
     }

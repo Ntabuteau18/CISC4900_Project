@@ -9,6 +9,7 @@ public class MusicController2 : MonoBehaviour
 
     public AudioClip musicClip1;
     public AudioClip musicClip2;
+    public AudioClip musicClip3;
 
     private AudioSource audioSource;
     private AudioClip currentClip;
@@ -36,12 +37,22 @@ public class MusicController2 : MonoBehaviour
     void Update()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName == "QuizBeginning" || sceneName == "HistoryQuiz")
+        if (sceneName == "MathQuiz" || sceneName == "HistoryQuiz" || sceneName == "ScienceQuiz")
         {
             if (currentClip != musicClip2)
             {
                 audioSource.Pause();
                 currentClip = musicClip2;
+                audioSource.clip = currentClip;
+                audioSource.Play();
+            }
+        }
+        else if (sceneName == "TrueOrFalseHistory" || sceneName == "TrueOrFalseMath" || sceneName == "TrueOrFalseScience" || sceneName == "TrueOrFalseGeography")
+        {
+            if (currentClip != musicClip3)
+            {
+                audioSource.Pause();
+                currentClip = musicClip3;
                 audioSource.clip = currentClip;
                 audioSource.Play();
             }
@@ -58,4 +69,5 @@ public class MusicController2 : MonoBehaviour
         }
     }
 }
+
 

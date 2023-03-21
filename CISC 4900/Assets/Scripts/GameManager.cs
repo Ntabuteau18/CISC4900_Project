@@ -123,7 +123,6 @@ public class GameManager : MonoBehaviour
         bool isCorrect = CheckAnswers();
         FinishedQuestions.Add(currentQuestion);
 
-        
 
         UpdateScore((isCorrect) ? Questions[currentQuestion].AddScore : -Questions[currentQuestion].AddScore);
 
@@ -277,6 +276,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /**
+     *  Restarts the game
+     * */
     public void Restart()
     {
         
@@ -284,6 +286,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /**
+     *  Goes back to main menu
+     * */
     public void menu()
     {
         SceneManager.LoadScene(0);
