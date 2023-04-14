@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class MainMenu : MonoBehaviour
 {
+
+    
     // Load Scene
     public void Play(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -16,7 +20,6 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Player has Quit the Game");
     }
 
-
-
+    
 
 }

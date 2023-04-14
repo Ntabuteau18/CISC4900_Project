@@ -61,6 +61,9 @@ public struct UIElements2
 
 public class UIManager2 : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip correctSound;
+    public AudioClip incorrectSound;
 
     public enum ResolutionScreenType {Correct, Incorrect, Finish}
 
@@ -138,11 +141,13 @@ public class UIManager2 : MonoBehaviour
                 uIElements.ResolutionBG.color = parameters.CorrectBGColor;
                 uIElements.ResolutionStateInfoText.text = "CORRECT";
                 uIElements.ResolutionScoreText.text = "+" + score;
+                audioSource.PlayOneShot(correctSound);
                 break;
             case ResolutionScreenType.Incorrect:
                 uIElements.ResolutionBG.color = parameters.IncorrectBGColor;
                 uIElements.ResolutionStateInfoText.text = "WRONG";
                 uIElements.ResolutionScoreText.text = "-" + score;
+                audioSource.PlayOneShot(incorrectSound);
                 break;
             case ResolutionScreenType.Finish:
                 uIElements.ResolutionBG.color = parameters.FinalBGColor;

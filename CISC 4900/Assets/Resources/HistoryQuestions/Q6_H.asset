@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc5c645f2a66f542aeb3f45a50e64df, type: 3}
   m_Name: Q6_H
   m_EditorClassIdentifier: 
-  info: dfg
+  info: 
   answers:
   - info: 3
     isCorrect: 0

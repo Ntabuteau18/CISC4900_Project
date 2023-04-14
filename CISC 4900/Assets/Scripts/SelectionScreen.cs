@@ -45,5 +45,24 @@ public class SelectionScreen : MonoBehaviour
         SceneManager.LoadScene(8);
     }
 
+    public void GoToMathImageQuiz()
+    {
+        SceneManager.LoadScene(9);
+    }
+
+    public void GoToHistoryImageQuiz()
+    {
+        SceneManager.LoadScene(10);
+    }
+
+    public void GoToScienceImageQuiz()
+    {
+        SceneManager.LoadScene(11);
+    }
+
+    public void GoToGeographyImageQuiz()
+    {
+        SceneManager.LoadScene(12);
+    }
 
 }

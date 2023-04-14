@@ -19,6 +19,10 @@ public class TOFResultsH : MonoBehaviour
 
     private TOFQuestionDataH questionData;
 
+    public AudioSource audioSource;
+    public AudioClip correctSound;
+    public AudioClip incorrectSound;
+
     void Start()
     {
         correctSprite.SetActive(false);
@@ -43,10 +47,12 @@ public class TOFResultsH : MonoBehaviour
         if (questions.questionlist[questions.currentQuestion].isTrue == answer)
         {
             scores.AddScore();
+            audioSource.PlayOneShot(correctSound);
         }
         else
         {
             scores.MinusScore();
+            audioSource.PlayOneShot(incorrectSound);
         }
 
         // Disable buttons if there are no remaining questions

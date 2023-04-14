@@ -32,13 +32,13 @@ MonoBehaviour:
   - question: x squared graph goes upwards
     isTrue: 1
     questioned: 0
-  - question: 9
+  - question: 9 * 5 = 34
     isTrue: 0
     questioned: 0
   - question: 2+2 = 4
     isTrue: 1
     questioned: 0
-  - question: 10
+  - question: 10 * 2 = 21
     isTrue: 0
     questioned: 0
   - question: 824 / 8 = 103

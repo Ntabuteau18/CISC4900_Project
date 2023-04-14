@@ -10,6 +10,7 @@ public class MusicController2 : MonoBehaviour
     public AudioClip musicClip1;
     public AudioClip musicClip2;
     public AudioClip musicClip3;
+    public AudioClip musicClip4;
 
     private AudioSource audioSource;
     private AudioClip currentClip;
@@ -57,6 +58,16 @@ public class MusicController2 : MonoBehaviour
                 audioSource.Play();
             }
         }
+        else if (sceneName == "MathImageQuiz" || sceneName == "HistoryImageQuiz" || sceneName == "ScienceImageQuiz" || sceneName == "GeographyImageQuiz")
+        {
+            if (currentClip != musicClip4)
+            {
+                audioSource.Pause();
+                currentClip = musicClip4;
+                audioSource.clip = currentClip;
+                audioSource.Play();
+            }
+        }
         else
         {
             if (currentClip != musicClip1)
@@ -68,6 +79,7 @@ public class MusicController2 : MonoBehaviour
             }
         }
     }
+
 }
 
 
