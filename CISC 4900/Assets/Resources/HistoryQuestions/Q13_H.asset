@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc5c645f2a66f542aeb3f45a50e64df, type: 3}
   m_Name: Q13_H
   m_EditorClassIdentifier: 
-  info: dfg
+  info: How many founding members were in the United Nations in 1945
   answers:
-  - info: 3
+  - info: 35
     isCorrect: 0
-  - info: 6
+  - info: 100
+    isCorrect: 0
+  - info: 29
+    isCorrect: 0
+  - info: 51
     isCorrect: 1
-  useTimer: 0
-  timer: 0
-  answerType: 0
-  addScore: 10
+  useTimer: 1
+  timer: 30
+  answerType: 1
+  addScore: 20

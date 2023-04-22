@@ -12,15 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46b0b17fd6654314a94c2a21d486a091, type: 3}
   m_Name: Q2_S
   m_EditorClassIdentifier: 
-  info: lolp
+  info: Which animal is NOT an omnivore
   answers:
-  - info: sniff
+  - info: Turtle
     isCorrect: 0
-  - info: 'my '
-    isCorrect: 0
-  - info: dank
+  - info: Penguin
     isCorrect: 1
-  useTimer: 0
-  timer: 0
+  - info: Bear
+    isCorrect: 0
+  - info: Monkey
+    isCorrect: 0
+  useTimer: 1
+  timer: 30
   answerType: 1
-  addScore: 10
+  addScore: 20

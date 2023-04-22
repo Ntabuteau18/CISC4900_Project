@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+/**
+ * This is the options menu that only allows a user to change settings to their desire.
+ * The only settings we have to offer are a fullscreen setting and an volume slider that changes
+ * the volume to your desired level.
+ * 
+ * */
 public class OptionsMenu : MonoBehaviour
 {
  
@@ -13,10 +19,6 @@ public void SetVolume (float volume){
         Debug.Log(volume);
     }
 
-public void QualitySetting (int QIndex){
-
-    QualitySettings.SetQualityLevel(QIndex);
-}
 
 public void FullScreenSetting (bool isFullScreen){
     Screen.fullScreen = isFullScreen;

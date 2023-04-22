@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/**
+ * This is the selection screen settings that takes the input from the user and loads the corresponding scene.
+ * Each name indicates what scene the user will be sent to.
+ * */
 public class SelectionScreen : MonoBehaviour
 {
     public void LoadFirstScene()

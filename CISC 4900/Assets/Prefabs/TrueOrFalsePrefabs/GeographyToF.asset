@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5fd168424aeee429b85bdb5f90bc2b, type: 3}
+  m_Name: GeographyToF
+  m_EditorClassIdentifier: 
+  currentQuestion: 1
+  questionlist:
+  - question: The Colorado River runs through the Grand Canyon
+    isTrue: 1
+    questioned: 0
+  - question: The Amazon River goes through Brazil only
+    isTrue: 0
+    questioned: 0
+  - question: The Yangtze River is the longest river in Asia
+    isTrue: 1
+    questioned: 0
+  - question: Africa is the largest continent on Earth
+    isTrue: 0
+    questioned: 0
+  - question: Mount Kilimanjaro is the tallest mountain in Africa
+    isTrue: 1
+    questioned: 0
+  - question: The Great Wall of China is  visible from space
+    isTrue: 0
+    questioned: 0
+  - question: Russia has 11 different time zones
+    isTrue: 1
+    questioned: 0
+  - question: Busan is the most populated city in South Korea
+    isTrue: 0
+    questioned: 0
+  - question: Vatican City is the smallest country in the world
+    isTrue: 1
+    questioned: 0
+  - question: North Dakota has the smallest US population
+    isTrue: 0
+    questioned: 0
+  - question: South Africa has 3 capital cities
+    isTrue: 1
+    questioned: 0
+  - question: Egypt has the most pyramids in the world
+    isTrue: 0
+    questioned: 0
+  - question: Japan's traffic is on the left side of the road
+    isTrue: 1
+    questioned: 0
+  - question: Tornadoes can only happen in the United States
+    isTrue: 0
+    questioned: 0
+  - question: Mount Logan is the tallest mountain in Canada
+    isTrue: 1
+    questioned: 0
+  - question: Blizzards are the most common natural disaster in the world
+    isTrue: 0
+    questioned: 0
+  - question: Earthquakes are caused by the movement of tectonic plates
+    isTrue: 1
+    questioned: 0
+  - question: New Orleans is located above sea level.
+    isTrue: 0
+    questioned: 0
+  - question: The Chernobyl disaster was caused by a nuclear explosion
+    isTrue: 1
+    questioned: 0
+  - question: Buenos Aires is the capital of Brazil
+    isTrue: 0
+    questioned: 0

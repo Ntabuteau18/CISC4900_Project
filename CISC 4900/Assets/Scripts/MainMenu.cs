@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
+/**
+ * Main Menu Script a simple script that only contains the option for a player to quit the game when done
+ * and press play which forwards the player to the next scene which is the selection screen.
+ * 
+ * **/
 public class MainMenu : MonoBehaviour
 {
 

@@ -5,8 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MusicController2 : MonoBehaviour
 {
-    public static MusicController2 instance;
+    /**
+     * Music Controller is the central audio system in the game that handles how the music is played throughout the game.
+     * It first makes instance variable that makes sure that only 1 object of it exists at all times and is not destroyed
+     * as the scene changes, then we attach an audioSource component to a variable. On Start the first music clip is played
+     * and on Update if the name of the scene matches one of the categories, a new music clip is played and the previous one
+     * stops. This repeats for the entire game and is simply a switching of music depending on the scene name
+     * */
 
+    public static MusicController2 instance;
     public AudioClip musicClip1;
     public AudioClip musicClip2;
     public AudioClip musicClip3;

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0931605d5573e754aa620095b542942b, type: 3}
+  m_Name: Q13_G
+  m_EditorClassIdentifier: 
+  info: What is the driest continent on Earth
+  answers:
+  - info: Antarctica
+    isCorrect: 1
+  - info: Africa
+    isCorrect: 0
+  - info: South America
+    isCorrect: 0
+  - info: Australia
+    isCorrect: 0
+  useTimer: 0
+  timer: 0
+  answerType: 1
+  addScore: 10

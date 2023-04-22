@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
 
     void LoadQuestions()
     {
-        Object[] obj = Resources.LoadAll("Questions", typeof(QuestionList));
+        Object[] obj = Resources.LoadAll("MathQuestions", typeof(QuestionList));
         questions = new QuestionList[obj.Length];
         for (int i = 0; i < obj.Length; i++)
         {

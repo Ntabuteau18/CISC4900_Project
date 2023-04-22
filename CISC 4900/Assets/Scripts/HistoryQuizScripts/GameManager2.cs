@@ -47,6 +47,7 @@ public class GameManager2 : MonoBehaviour
     }
     void Awake()
     {
+
         events.CurrentFinalScore = 0;
 
     }
@@ -238,6 +239,30 @@ public class GameManager2 : MonoBehaviour
         }
     }
 
+    
+
+    
+
+    private void SetHighScore()
+    {
+        var highscore = PlayerPrefs.GetInt(GameUtil2.SavePrefKey);
+        if (highscore < events.CurrentFinalScore)
+        {
+            PlayerPrefs.SetInt(GameUtil2.SavePrefKey, events.CurrentFinalScore);
+        }
+    }
+
+
+    private void UpdateScore(int add)
+    {
+        events.CurrentFinalScore += add;
+
+        if(events.ScoreUpdated != null)
+        {
+            events.ScoreUpdated();
+        }
+    }
+
     QuestionList2 GetRandomQuestion()
     {
         var randomIndex = GetRandomQuestionIndex();
@@ -257,27 +282,7 @@ public class GameManager2 : MonoBehaviour
         }
         return random;
     }
-    
-    
 
-    private void UpdateScore(int add)
-    {
-        events.CurrentFinalScore += add;
-
-        if(events.ScoreUpdated != null)
-        {
-            events.ScoreUpdated();
-        }
-    }
-
-    private void SetHighScore()
-    {
-        var highscore = PlayerPrefs.GetInt(GameUtil2.SavePrefKey);
-        if (highscore < events.CurrentFinalScore)
-        {
-            PlayerPrefs.SetInt(GameUtil2.SavePrefKey, events.CurrentFinalScore);
-        }
-    }
 
     public void Restart()
     {

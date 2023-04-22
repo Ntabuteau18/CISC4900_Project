@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46b0b17fd6654314a94c2a21d486a091, type: 3}
   m_Name: Q1_S
   m_EditorClassIdentifier: 
-  info: SNIPER
+  info: What part of the brain deals with hearing and language
   answers:
-  - info: yodie
+  - info: Temporal lobe
     isCorrect: 1
-  - info: gang
+  - info: Frontal lobe
+    isCorrect: 0
+  - info: Parietal lobe
+    isCorrect: 0
+  - info: Cerebellum
     isCorrect: 0
   useTimer: 0
   timer: 0

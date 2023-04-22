@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc5c645f2a66f542aeb3f45a50e64df, type: 3}
   m_Name: Q4_H
   m_EditorClassIdentifier: 
-  info: dfg
+  info: What nation separated from the United Kingdom in 1921?
   answers:
-  - info: 3
-    isCorrect: 0
-  - info: 6
+  - info: Ireland
     isCorrect: 1
-  useTimer: 0
-  timer: 0
-  answerType: 0
-  addScore: 10
+  - info: England
+    isCorrect: 0
+  - info: Wales
+    isCorrect: 0
+  - info: Scotland
+    isCorrect: 0
+  useTimer: 1
+  timer: 30
+  answerType: 1
+  addScore: 20

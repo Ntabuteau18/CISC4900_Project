@@ -13,7 +13,6 @@ public struct UIManagerParameters2
     public float Margins { get { return margins; } }
 
     [Header("Resolution Screen Options")]
-    
     [SerializeField] Color correctBGColor;
     public Color CorrectBGColor { get { return correctBGColor; } }
     
@@ -152,6 +151,7 @@ public class UIManager2 : MonoBehaviour
             case ResolutionScreenType.Finish:
                 uIElements.ResolutionBG.color = parameters.FinalBGColor;
                 uIElements.ResolutionStateInfoText.text = "Final Score";
+                uIElements.ResolutionScoreText.text = events.CurrentFinalScore.ToString();
 
                 StartCoroutine(CalculateScore());
                 uIElements.FinishedUIElements.gameObject.SetActive(true);

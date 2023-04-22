@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc5c645f2a66f542aeb3f45a50e64df, type: 3}
   m_Name: Q10_H
   m_EditorClassIdentifier: 
-  info: dfg
+  info: Who was the founder of the Mongol Empire
   answers:
-  - info: 3
+  - info: Hoelun
     isCorrect: 0
-  - info: 6
+  - info: Khochen Beki
+    isCorrect: 0
+  - info: Batu Khan
+    isCorrect: 0
+  - info: Genghis Khan
     isCorrect: 1
   useTimer: 0
   timer: 0
-  answerType: 0
+  answerType: 1
   addScore: 10

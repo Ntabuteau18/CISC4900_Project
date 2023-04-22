@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/Scenes/SelectionScreen.unity
     guid: 3ae332281c9d7c64ab97fa27a3fe0884
   - enabled: 1
-    path: Assets/Scenes/MathQuiz.unity
+    path: Assets/Scenes/MainQuizes/MathQuiz.unity
     guid: 9a43c0ec94e064047bf5807ef0062c54
   - enabled: 1
-    path: Assets/Scenes/HistoryQuiz.unity
+    path: Assets/Scenes/MainQuizes/HistoryQuiz.unity
     guid: a595c8b1af951ef49843807e04d4ff28
   - enabled: 1
     path: Assets/Scenes/TrueOrFalseQuizes/TrueOrFalseMath.unity
@@ -30,7 +30,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TrueOrFalseQuizes/TrueOrFalseGeography.unity
     guid: 8a43b9819b1cd624ba7946333c31b92d
   - enabled: 1
-    path: Assets/Scenes/ScienceQuiz.unity
+    path: Assets/Scenes/MainQuizes/ScienceQuiz.unity
     guid: 78c67b12b745f0f46bb05a01bcbbf730
   - enabled: 1
     path: Assets/Scenes/ImageQuizes/MathImageQuiz.unity

@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999e13fb83452ce448678faffd43b63e, type: 3}
+  m_Name: ScienceToF
+  m_EditorClassIdentifier: 
+  currentQuestion: 0
+  questionlist:
+  - question: Mercury is the nearest planet to the sun
+    isTrue: 1
+    questioned: 0
+  - question: Bears are the largest known land animal
+    isTrue: 0
+    questioned: 0
+  - question: Sharks have no bones
+    isTrue: 1
+    questioned: 0
+  - question: The lung is the largest organ of the body
+    isTrue: 0
+    questioned: 0
+  - question: Ag is the symbol for Silver on the periodic table
+    isTrue: 1
+    questioned: 0
+  - question: Frogs are reptiles
+    isTrue: 0
+    questioned: 0
+  - question: Neutrons have no electrical charge
+    isTrue: 1
+    questioned: 0
+  - question: The human heart has 3 chambers
+    isTrue: 0
+    questioned: 0
+  - question: Smallpox was the first disease a vaccine was created for
+    isTrue: 1
+    questioned: 0
+  - question: The center of an atom is called the core
+    isTrue: 0
+    questioned: 0
+  - question: The sun is techincally a star
+    isTrue: 1
+    questioned: 0
+  - question: A group of tigers is known as a Pride
+    isTrue: 0
+    questioned: 0
+  - question: An octopus has 3 hearts
+    isTrue: 1
+    questioned: 0
+  - question: A penny is mostly made of iron
+    isTrue: 0
+    questioned: 0
+  - question: Human hair and nails are made from the same material
+    isTrue: 1
+    questioned: 0
+  - question: Antibiotics are effective against bacteria and viruses
+    isTrue: 0
+    questioned: 0
+  - question: The force that causes objects to fall to the ground is  gravity
+    isTrue: 1
+    questioned: 0
+  - question: Red stars are hotter than Blue stars
+    isTrue: 0
+    questioned: 0
+  - question: The speed of sound is faster in water than in air
+    isTrue: 1
+    questioned: 0
+  - question: Earth is the only planet that has a moon
+    isTrue: 0
+    questioned: 0
