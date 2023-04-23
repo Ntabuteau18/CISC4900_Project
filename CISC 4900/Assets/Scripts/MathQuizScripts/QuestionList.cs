@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
+/*This is the QuestionList file that allows us to create a new Question object and have multiple attributes associated with
+ * them. These attributes include if the answer is single or multiple choice, does the question use a timer, the actual question
+ * text, how much points you earn for a correct answer, and the answer itself. These options are Serializable as it allows us to
+ * manipulate all of them from within the Unity Editor. 
+ * 
+ * The GetCorrectAnswers List holds all the indexes of the correct answers for their respective questions.
+ * 
+ * 
+ */
 [Serializable()]
 public struct Answer
 {

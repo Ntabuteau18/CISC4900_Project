@@ -4,6 +4,17 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+
+/**
+ * AnswerList is a script that handles the logic for showing and updating the selection of an answer choice on the UI.
+ * It invokes the delegate UpdateQuestionAnswer delegate from GameEvents to tell it if the answer choice has changed.
+ * 
+ * The SwitchState method toggles the Checked bool by calling the UpdateUI method, and updates the UpdateQuestionAnswer delegate to tell it this is the answer I'm choosing if checked.
+ * The UpdateData method updates the answer option text and the index of the answer.
+ * The UpdateUI method swaps between the checked and unchecked status.
+ * The Reset method resets the checked status to false and calls the UpdateUI method to set the unchecked status to true and vice versa.
+ * The RectTransform is used in creating and positioning of a single answer choice that will be replicated 3 times on the screen with the answer prefab.
+ */
 public class AnswerList : MonoBehaviour
 {
     [Header("UI Elements")]

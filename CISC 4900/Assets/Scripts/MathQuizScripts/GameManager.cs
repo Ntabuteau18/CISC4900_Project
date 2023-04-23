@@ -5,6 +5,35 @@ using System.Linq;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+/*
+*The GameManager is the brains of the game coordinating every action made from each script and managing all of the game's logic from loading and displaying questions to checking the answers.
+*
+*The Menu method goes back to the main menu of the game.
+*The Restart method restarts the quiz again.
+*The SetHighScore method creates a new highscore if the current score is higher than the old highscore.
+*The UpdateScore method is responsible for updating the current score that is seen on the screen.
+*The GetRandomQuestionIndex method randomly retrieves an index from the remaining questions and returns it.
+*The GetRandomQuestion method gets the question info selected from the random index in GetRandomQuestionIndex.
+*The LoadQuestions method loads in the question objects that are in the Resources folder under Mathquestions and loads them all into the game.
+*The CompareAnswers method checks the picked answer List to find the answer chosen and compares it to the actual correct answers and will send back true if it is right or false if it finds a right answer not chosen.
+*The CheckAnswers method calls Compare Answers to check if what was returned is true or false.
+*The IEnumerator WaitTillNextRound delays transitioning from one question to another for a second until the pop-up screen is gone.
+*The IEnumerator StartTimer is a timer used on certain questions that dictates you only have a certain amount of time until the question auto-accepts whatever answer chosen.
+*The UpdateTimer method is switching between if a question has a timer checked then use it, if not, don't use it.
+*The Accept answer takes the answer choice made by the user, checks if it was right or wrong, displays the appropriate pop-up screen, updates the score and moves on to the next question after a delay. At the end of the game, it displays the Game Over screen. Once done it checks if a new highscore is needed to be set.
+*The Display method puts the question text on the screen and if the question uses a timer, that timer is shown as well.
+*The EraseAnswers method clears all answer choices made by the player by destroying them with a new empty list.
+*The UpdateAnswers method takes in the answer choice made by the user and first looks if the question has a single answer, if so, then it clears all previously picked answers and sets the picked answer to the one the user made.
+*
+*On the Start method, it sets the starter highscore, loads the questions, and creates a random seed that initializes Unity's random class when picking random questions, so it's different every playthrough of the game.
+*
+*On the Enable and Disable, it subscribes to the delegate UpdateQuestionAnswer to inform it of changes in answers.
+*
+On the Awake method, it sets the current score to 0 each time the game starts.
+*/
+
+
+
 public class GameManager : MonoBehaviour
 {
     QuestionList[] questions = null;
@@ -40,10 +69,12 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         events.UpdateQuestionAnswer += UpdateAnswers;
+        
     }
     void OnDisable()
     {
         events.UpdateQuestionAnswer -= UpdateAnswers;
+        
     }
     void Awake()
     {
@@ -293,5 +324,4 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-
 }

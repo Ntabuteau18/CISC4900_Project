@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainQuizes/HistoryQuiz.unity
     guid: a595c8b1af951ef49843807e04d4ff28
   - enabled: 1
+    path: Assets/Scenes/MainQuizes/ScienceQuiz.unity
+    guid: 78c67b12b745f0f46bb05a01bcbbf730
+  - enabled: 1
     path: Assets/Scenes/TrueOrFalseQuizes/TrueOrFalseMath.unity
     guid: cac5bc0c79ba3a8458d6e2180a87acac
   - enabled: 1
@@ -29,9 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TrueOrFalseQuizes/TrueOrFalseGeography.unity
     guid: 8a43b9819b1cd624ba7946333c31b92d
-  - enabled: 1
-    path: Assets/Scenes/MainQuizes/ScienceQuiz.unity
-    guid: 78c67b12b745f0f46bb05a01bcbbf730
   - enabled: 1
     path: Assets/Scenes/ImageQuizes/MathImageQuiz.unity
     guid: c0de273a84f483448a2427b2d73aa190

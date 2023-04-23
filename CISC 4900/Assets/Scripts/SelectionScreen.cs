@@ -25,27 +25,27 @@ public class SelectionScreen : MonoBehaviour
         SceneManager.LoadScene(3);
     }
 
-    public void GoToMathTrueOrFalseQuiz()
+    public void GoToScienceQuizScene()
     {
         SceneManager.LoadScene(4);
     }
 
-    public void GoToHistoryTrueOrFalse()
+    public void GoToMathTrueOrFalseQuiz()
     {
         SceneManager.LoadScene(5);
     }
 
-    public void GoToScienceTrueOrFalse()
+    public void GoToHistoryTrueOrFalse()
     {
         SceneManager.LoadScene(6);
     }
 
-    public void GoToGeographyTrueOrFalse()
+    public void GoToScienceTrueOrFalse()
     {
         SceneManager.LoadScene(7);
     }
 
-    public void GoToScienceQuizScene()
+    public void GoToGeographyTrueOrFalse()
     {
         SceneManager.LoadScene(8);
     }

@@ -5,6 +5,21 @@ using System;
 using TMPro;
 using UnityEngine.UI;
 
+/**
+ * UIManager is responsible for everything realted to the UI. It contaims many different parameters and elements that 
+ * change with the screen during gameplay. 
+ * 
+ * The UpdateScoreUI method is responsible for updating the current score of the game you see, adding or subtracting points.
+ * The EraseAnswers method clears the current answerlist of choices once a selction was made and the next button pressed.
+ * The CreateAnswers method is used in first clearing the UI off all previous answers and placing in the next new 4 answer options in the Answer area.
+ * The IEnumerator CalculateScore() is used in calculating the final score of the game and displaying it on the game over screen.
+ * The UpdateResolutionUI is switching between each pop up screen depending on the action, and displaying the game over screen when the game is over.
+ * The IEnumerator DisplayTimeResolution is used in blocking interaction with the main screen when the pop up occurs to ensure now mistakes in choice selection.
+ * The DisplayResolution is what picks each screen in the UpdateResolutionUI depending on if the answer was correct, wrong, or if the game is over.
+ * The UpdateQuestionUI simply takes answers from the QuestionList and sets the text equal to it and sets the answer choices as well.
+ * On Enable and Disable we subscribe to the delegates in GameEvents necessary for informing of the changes made.
+ * On Start update the score UI to 0 and hide the pop up screens until they are needed.
+ */
 [Serializable()]
 public struct UIManagerParameters
 {
@@ -153,6 +168,7 @@ public class UIManager : MonoBehaviour
                 uIElements.ResolutionBG.color = parameters.FinalBGColor;
                 uIElements.ResolutionStateInfoText.text = "Final Score";
                 uIElements.ResolutionScoreText.text = events.CurrentFinalScore.ToString();
+
 
                 StartCoroutine(CalculateScore());
                 uIElements.FinishedUIElements.gameObject.SetActive(true);
