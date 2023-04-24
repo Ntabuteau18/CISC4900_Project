@@ -7,5 +7,5 @@ Welcome to our CISC 4900 Game Project
 https://ntabuteau18.itch.io/world-of-knowledge
 
 Authors : 
-Naldy Tabuteau
+Naldy Tabuteau,
 David Rothstein
