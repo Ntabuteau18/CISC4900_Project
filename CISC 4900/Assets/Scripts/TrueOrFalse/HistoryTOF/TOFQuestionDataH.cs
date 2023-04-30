@@ -7,11 +7,20 @@ using UnityEngine.UI;
 
 public class TOFQuestionDataH : MonoBehaviour
 {
+    /**
+     * TOFQuesetionData is the main game in asking users the question and handling setting questions to done after they have been answered
+     * 
+     * AskQuestion selects a random question to ask to the user from a random index and after asking sets the status of the question to questioned
+     * ClearQuestions sets all questions status to unasked when the game starts up so all are ready to be loaded in
+     * Menu takes the user back to the menu
+     * CountRemainingQuestions counts how many questions are left and when over displays a game over message and a menu button
+     * */
+
     public ToFQuestionsH questions;
     [SerializeField] private TextMeshProUGUI questionText;
 
-    public Canvas gameOverCanvas; // Reference to the canvas that displays the "Game Over" message
-    public TextMeshProUGUI gameOverText; // Reference to the Text component that displays the "Game Over" message
+    public Canvas gameOverCanvas; 
+    public TextMeshProUGUI gameOverText; 
 
     void Start()
     {
@@ -24,7 +33,6 @@ public class TOFQuestionDataH : MonoBehaviour
         {
            questionText.text = string.Empty;
             ClearQuestions();
-          //  SceneManager.LoadScene(0);
             return;
         }
 
@@ -68,9 +76,8 @@ public int CountRemainingQuestions()
 
     if (remainingQuestions == 0)
     {
-        // Show game over message
-        gameOverCanvas.gameObject.SetActive(true); // Show the canvas
-        gameOverText.text = "Game Over"; // Set the text of the Text component to "Game Over"
+        gameOverCanvas.gameObject.SetActive(true); 
+        gameOverText.text = "Game Over"; 
     }
 
     return remainingQuestions;

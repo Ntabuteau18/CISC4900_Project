@@ -6,9 +6,13 @@ using TMPro;
 
 
 /**
- * Standard Scoring system that starts at 0 and if its correct it adds 10 and if incorrect it substracts 10 until
- * it reaches zero then it stays at zero.
+ * TOFScores handles the scoring system in the True or False quiz
+ * 
+ * Start sets the current score to 0 on startup
+ * AddScore adds plus 10 to the currentscore when the user answers correctly
+ * MinusScore subtracts 10 from the score until it reaches 0
  * */
+
 public class TOFScores : MonoBehaviour
 {
 

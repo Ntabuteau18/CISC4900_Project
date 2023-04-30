@@ -6,6 +6,15 @@ using UnityEngine.Events;
 
 public class TOFResultsG : MonoBehaviour
 {
+/**
+ * TOFResults handles the submission data the user has chosen and gives them feedback in the form of the answer being right or wrong
+ * 
+ * Start sets the true and false buttons to false initially and when the quiz is over turns them off
+ * ShowResults handles the showing the correct or incorrect sprite after an answer is made as well as a sound effect
+ * IEnumerator ShowResult makes the sprites wait a second before dissapearing when the next question starts
+ * 
+ */
+
     public ToFQuestionsG questions;
     public GameObject correctSprite;
     public GameObject incorrectSprite;
@@ -28,10 +37,10 @@ public class TOFResultsG : MonoBehaviour
         correctSprite.SetActive(false);
         incorrectSprite.SetActive(false);
 
-        // Get reference to the TOFQuestionData script
+        
         questionData = FindObjectOfType<TOFQuestionDataG>();
 
-        // Disable buttons if there are no remaining questions
+        
         if (questionData.CountRemainingQuestions() == 0)
         {
             trueButton.interactable = false;
@@ -55,7 +64,7 @@ public class TOFResultsG : MonoBehaviour
             audioSource.PlayOneShot(incorrectSound);
         }
 
-        // Disable buttons if there are no remaining questions
+   
         if (questionData.CountRemainingQuestions() == 0)
         {
             trueButton.interactable = false;

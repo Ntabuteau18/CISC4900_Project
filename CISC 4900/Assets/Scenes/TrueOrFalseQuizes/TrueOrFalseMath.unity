@@ -344,7 +344,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1881054542}
         m_TargetAssemblyTypeName: TOFQuestionData, Assembly-CSharp
-        m_MethodName: GoToPreviousScene
+        m_MethodName: Menu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

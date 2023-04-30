@@ -6,6 +6,14 @@ using TMPro;
 
 public class TOFScoresG : MonoBehaviour
 {
+    /**
+     * TOFScores handles the scoring system in the True or False quiz
+     * 
+     * Start sets the current score to 0 on startup
+     * AddScore adds plus 10 to the currentscore when the user answers correctly
+     * MinusScore subtracts 10 from the score until it reaches 0
+     * */
+
     public TextMeshProUGUI  scoreText;
     private int currentScore;
 

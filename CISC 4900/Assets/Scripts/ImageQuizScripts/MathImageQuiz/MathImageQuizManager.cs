@@ -7,11 +7,25 @@ using UnityEngine.SceneManagement;
 
 public class MathImageQuizManager : MonoBehaviour
 {
+    /**
+     * ImageQuizManager is the script that handles all the mechanics from the game such as setting answers and questions, and setting correct or wrong answers
+     * Start sets the gameover screen to false, creates a count of all questions in the list and creates a question for the user
+     * Correct adds 10 to the score, removes the current question from the list and sets a delay before the next question shows
+     * Wrong removes the current question from the list and sets a delay before the next question shows
+     * GameOver sets the game over screen to true, displaying the users final score
+     * SetAnswers sets all options correctness to false initially then sets the text of each option to its corresponding answer, finally it finds 
+     * the correct answer choice by using the number index from the "CorrectAnswer" field of the current question
+     * Restart restarts from the beginning
+     * Menu goes back to the menu
+     * IEnumerator Delay is a delay for a second before the next question displays
+     * CreateQuestion gets a random question and image from the list and displays it
+     * 
+     * */
     public List<MathImageQnA> QnA;
     public GameObject[] options;
     public int currentQuestion;
 
-    public Image QuestionImage; // changed from TMP_Text
+    public Image QuestionImage; 
     public TMP_Text ScoreText;
 
     public TMP_Text QuestionText;
@@ -62,14 +76,12 @@ public class MathImageQuizManager : MonoBehaviour
             }
         }
     }
-
-    // retstart the scene
+  
     public void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    // go to the menu
     public void menu()
     {
         SceneManager.LoadScene(0);
@@ -77,37 +89,25 @@ public class MathImageQuizManager : MonoBehaviour
 
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(1f); // delay for 1 second before creating next question
+        yield return new WaitForSeconds(1f); 
         CreateQuestion();
     }
 
-    // get a random question and display it
+    
     void CreateQuestion()
     {
         if (QnA.Count > 0)
         {
-            currentQuestion = Random.Range(0, QnA.Count);
-
-            // Load image from the QnA list and assign to the QuestionImage sprite
+            currentQuestion = Random.Range(0, QnA.Count);           
             QuestionImage.sprite = QnA[currentQuestion].QuestionImage;
-
-            // Load text question from the QnA list and assign to the QuestionText component
             QuestionText.text = QnA[currentQuestion].QuestionText;
 
             SetAnswers();
         }
         else
         {
-            Debug.Log("finished");
             GameOver();
         }
     }
 
 }
-
-
-
-
-
-
-

@@ -8,15 +8,18 @@ using UnityEngine.UI;
 public class TOFQuestionData : MonoBehaviour
 {
     /**
-     * This is the main game that starts off by randomly selecting a question, asking the question and setting the questioned
-     * status depending on if the questioned was answered. It counts the remaining questions left and once it reaches zero a
-     * new pop up game over message is shown
+     * TOFQuesetionData is the main game in asking users the question and handling setting questions to done after they have been answered
+     * 
+     * AskQuestion selects a random question to ask to the user from a random index and after asking sets the status of the question to questioned
+     * ClearQuestions sets all questions status to unasked when the game starts up so all are ready to be loaded in
+     * Menu takes the user back to the menu
+     * CountRemainingQuestions counts how many questions are left and when over displays a game over message and a menu button
      * */
     public ToFQuestions questions;
     [SerializeField] private TextMeshProUGUI questionText;
 
-    public Canvas gameOverCanvas; // Reference to the canvas that displays the "Game Over" message
-    public TextMeshProUGUI gameOverText; // Reference to the Text component that displays the "Game Over" message
+    public Canvas gameOverCanvas; 
+    public TextMeshProUGUI gameOverText; 
 
     void Start()
     {
@@ -28,8 +31,7 @@ public class TOFQuestionData : MonoBehaviour
         if (CountRemainingQuestions() == 0)
         {
            questionText.text = string.Empty;
-            ClearQuestions();
-       
+            ClearQuestions();      
             return;
         }
 
@@ -52,7 +54,7 @@ public class TOFQuestionData : MonoBehaviour
         }
     }
 
-    public void GoToPreviousScene()
+    public void Menu()
     {
         SceneManager.LoadScene(0);
     }
@@ -73,9 +75,8 @@ public int CountRemainingQuestions()
 
     if (remainingQuestions == 0)
     {
-        // Show game over message
-        gameOverCanvas.gameObject.SetActive(true); // Show the canvas
-        gameOverText.text = "Game Over"; // Set the text of the Text component to "Game Over"
+        gameOverCanvas.gameObject.SetActive(true); 
+        gameOverText.text = "Game Over"; 
     }
 
     return remainingQuestions;

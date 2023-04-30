@@ -7,6 +7,7 @@ using UnityEngine;
 public class ToFQuestions : ScriptableObject
 {
     /**
+     * TOFQuestions is how we are able to create the questions in unity
      * This is the questions setting that takes in the values of
      * question: The actual question
      * isTrue: Which answer is right

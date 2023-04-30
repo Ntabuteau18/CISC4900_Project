@@ -34,14 +34,10 @@ public class HistoryImageAnswers : MonoBehaviour
             GetComponent<Image>().color = Color.red;
             Debug.Log("Wrong");
             quizManager.wrong();
-
-            if (wrongAudioSource != null)
-            {
-                audioSource.PlayOneShot(wrongAudioSource);
-            }
+            audioSource.PlayOneShot(wrongAudioSource);
         }
 
-        // Set the color back to the starter color after 1 second
+       
         StartCoroutine(ResetColorAfterDelay(1f));
     }
 

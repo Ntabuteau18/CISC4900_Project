@@ -5,11 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 /**
- * This is the results script that handles everything once the player has submitted an answer it starts by when a 
- * answer is selected it shows the corresponding sprite to say if its right or wrong. It then either adds or subtracts the
- * score and plays the corresponding sound effect to tell the user if they answered correctly or not. There is a delay in place
- * that makes the user wait between questions for a second to not accidentally answer rapidly. Once all questoins are done
- * the game will be over and show a game over pop up and disable the functionality of the true and false buttons.
+ * TOFResults handles the submission data the user has chosen and gives them feedback in the form of the answer being right or wrong
+ * 
+ * Start sets the true and false buttons to false initially and when the quiz is over turns them off
+ * ShowResults handles the showing the correct or incorrect sprite after an answer is made as well as a sound effect
+ * IEnumerator ShowResult makes the sprites wait a second before dissapearing when the next question starts
+ * 
  */
 public class TOFResults : MonoBehaviour
 {
@@ -35,10 +36,10 @@ public class TOFResults : MonoBehaviour
         correctSprite.SetActive(false);
         incorrectSprite.SetActive(false);
 
-        // Get reference to the TOFQuestionData script
+        
         questionData = FindObjectOfType<TOFQuestionData>();
 
-        // Disable buttons if there are no remaining questions
+        
         if (questionData.CountRemainingQuestions() == 0)
         {
             trueButton.interactable = false;
@@ -63,8 +64,7 @@ public class TOFResults : MonoBehaviour
             audioSource.PlayOneShot(incorrectSound);
 
         }
-
-        // Disable buttons if there are no remaining questions
+        
         if (questionData.CountRemainingQuestions() == 0)
         {
             trueButton.interactable = false;
